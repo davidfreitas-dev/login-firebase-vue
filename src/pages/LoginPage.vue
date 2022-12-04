@@ -51,7 +51,7 @@ import Logo from '../components/Logo.vue';
       <div class="flex items-center gap-2">
         <Checkbox :text="'Checkbox'" />
 
-        <label for="lblCheckbox" class="text-gray-200">
+        <label for="lblCheckbox" class="text-gray-400 text-sm">
           Lembrar de mim por 30 dias
         </label>
       </div>
@@ -63,7 +63,17 @@ import Logo from '../components/Logo.vue';
     </form>
 
     <footer class="flex flex-col items-center gap-4 mt-8">
-      
+      <Text
+        :size="'sm'"
+        :text="'Esqueceu sua senha?'"
+        class="text-gray-400 cursor-pointer hover:text-gray-200"
+      />
+
+      <Text
+        :size="'sm'"
+        :text="'Não possui conta? Crie uma agora!'"
+        class="text-gray-400 cursor-pointer hover:text-gray-200"
+      />
     </footer>
   </div>
 </template>
