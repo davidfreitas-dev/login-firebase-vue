@@ -33,7 +33,7 @@ import Logo from '../components/Logo.vue';
 
         <TextInput
           :icon="'EnvelopeIcon'"
-          :text="'Placeholder'"
+          :text="'user@domain.com'"
         />
       </div>
 
@@ -44,7 +44,7 @@ import Logo from '../components/Logo.vue';
 
         <TextInput
           :icon="'LockClosedIcon'"
-          :text="'Placeholder'"
+          :text="'**********'"
         />
       </div>
 
