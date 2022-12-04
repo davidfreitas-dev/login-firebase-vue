@@ -1,4 +1,5 @@
 <script setup>
+import { UserIcon } from '@heroicons/vue/24/outline'
 import { EnvelopeIcon } from '@heroicons/vue/24/outline'
 import { LockClosedIcon } from '@heroicons/vue/24/outline'
 
@@ -7,6 +8,11 @@ const props = defineProps(['icon', 'text'])
 
 <template>
   <div class="flex items-center gap-3 h-12 py-4 px-3 rounded bg-gray-800 w-full focus-within:ring-2 ring-brand-hover">
+    <UserIcon
+      v-if="(icon === 'UserIcon')"
+      class="w-6 h-6 text-gray-400"
+    />
+    
     <EnvelopeIcon
       v-if="(icon === 'EnvelopeIcon')"
       class="w-6 h-6 text-gray-400"

@@ -33,7 +33,7 @@ import Logo from '../components/Logo.vue';
 
         <TextInput
           :icon="'EnvelopeIcon'"
-          :text="'user@domain.com'"
+          :text="'johndoe@email.com'"
         />
       </div>
 
@@ -63,17 +63,21 @@ import Logo from '../components/Logo.vue';
     </form>
 
     <footer class="flex flex-col items-center gap-4 mt-8">
-      <Text
-        :size="'sm'"
-        :text="'Esqueceu sua senha?'"
-        class="text-gray-400 cursor-pointer hover:text-gray-200"
-      />
+      <router-link to="/forgot">
+        <Text
+          :size="'sm'"
+          :text="'Esqueceu sua senha?'"
+          class="text-gray-400 cursor-pointer hover:text-gray-200"
+        />
+      </router-link>
 
-      <Text
-        :size="'sm'"
-        :text="'Não possui conta? Crie uma agora!'"
-        class="text-gray-400 cursor-pointer hover:text-gray-200"
-      />
+      <router-link to="/register">
+        <Text
+          :size="'sm'"
+          :text="'Não possui conta? Crie uma agora!'"
+          class="text-gray-400 cursor-pointer hover:text-gray-200"
+        />
+      </router-link>
     </footer>
   </div>
 </template>
