@@ -1,5 +1,7 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import { useToast } from '../use/useToast';
+import { useException } from '../use/useException';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'vue-router';
 import Heading from '../components/Heading.vue';
@@ -8,6 +10,7 @@ import Button from '../components/Button.vue';
 import Checkbox from '../components/Checkbox.vue';
 import TextInput from '../components/TextInput.vue';
 import Logo from '../components/Logo.vue';
+import Toast from '../components/Toast.vue';
 
 const router = useRouter()
 
@@ -29,8 +32,9 @@ const login = () => {
       router.push('/')
     })
     .catch((err) => {
-      console.log(err.code)
-      alert(err.message)
+      console.log(err.message, err.code)
+      handleException(err.code)
+      handleToast('error', exception)
     })
     .finally(() => {
       isLoading.value = false
@@ -42,6 +46,9 @@ const validateForm = (event) => {
 
   login()
 }
+
+const { handleException, exception } = useException()
+const { toast, toastData, handleToast } = useToast()
 </script>
 
 <template>
@@ -121,5 +128,7 @@ const validateForm = (event) => {
         />
       </router-link>
     </footer>
+
+    <Toast ref="toast" :toastData="toastData"/>
   </div>
 </template>

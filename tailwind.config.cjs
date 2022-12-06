@@ -8,8 +8,10 @@ module.exports = {
     extend: {},
     colors: {
       ...require('tailwindcss/colors'),
+      'brand-hover': '#66c090',
       brand: '#55b984',
-      'brand-hover': '#66c090'
+      danger: '#FF316D',
+      success: '#00E4A1'
     }
   },
   plugins: [],
