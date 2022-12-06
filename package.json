@@ -12,6 +12,7 @@
     "@headlessui/vue": "^1.7.2",
     "@heroicons/vue": "^2.0.12",
     "axios": "^0.27.2",
+    "firebase": "^9.14.0",
     "pinia": "^2.0.21",
     "vue": "^3.2.41",
     "vue-axios": "^3.4.1",

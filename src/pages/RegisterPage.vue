@@ -1,10 +1,14 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useRouter } from 'vue-router';
 import Heading from '../components/Heading.vue';
 import Text from '../components/Text.vue';
 import Button from '../components/Button.vue';
 import TextInput from '../components/TextInput.vue';
 import Logo from '../components/Logo.vue';
+
+const router = useRouter()
 
 const userData = reactive({
   name: '',
@@ -13,18 +17,33 @@ const userData = reactive({
   confirmPassword: ''
 })
 
-const isLoading = ref(false)
+let isLoading = ref(false)
+
+const register = () => {
+  isLoading.value = true
+
+  createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
+    .then((res) => {
+      console.log('Registrado com sucesso!', res)
+      router.push('/')
+    })
+    .catch((err) => {
+      console.log(err.code)
+      alert(err.message)
+    })
+    .finally(() => {
+      isLoading.value = false
+    })
+}
+
+const signInWithGoogle = () => {
+  
+}
 
 const validateForm = (event) => {
-  event.preventDefault();
+  event.preventDefault()
 
-  isLoading.value = true
-  
-  setTimeout(() => {
-    console.log('UserData: ', userData)
-
-    isLoading.value = false
-  }, 3000);
+  register()
 }
 </script>
 
