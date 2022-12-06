@@ -3,7 +3,12 @@ import { UserIcon } from '@heroicons/vue/24/outline'
 import { EnvelopeIcon } from '@heroicons/vue/24/outline'
 import { LockClosedIcon } from '@heroicons/vue/24/outline'
 
-const props = defineProps(['icon', 'text'])
+const props = defineProps(['type', 'icon', 'text', 'modelValue'])
+const emit = defineEmits(['update:modelValue', 'onKeyupEnter'])
+
+const updateValue = (event) => {
+  emit('update:modelValue', event.target.value)
+}
 </script>
 
 <template>
@@ -23,9 +28,13 @@ const props = defineProps(['icon', 'text'])
       class="w-6 h-6 text-gray-400"
     />
 
-    <input 
+    <input
       className="bg-transparent flex-1 text-gray-100 text-base placeholder:text-gray-400 outline-none"
+      :type="type"
       :placeholder="text"
+      :value="modelValue"
+      @input="updateValue"
+      @keyup.enter="$emit('onKeyupEnter')"
     />
   </div>
 </template>

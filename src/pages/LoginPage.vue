@@ -1,10 +1,30 @@
 <script setup>
+import { ref, reactive } from 'vue';
 import Heading from '../components/Heading.vue';
 import Text from '../components/Text.vue';
 import Button from '../components/Button.vue';
 import Checkbox from '../components/Checkbox.vue';
 import TextInput from '../components/TextInput.vue';
 import Logo from '../components/Logo.vue';
+
+const loginData = reactive({
+  email: '',
+  password: ''
+})
+
+const isLoading = ref(false)
+
+const validateForm = (event) => {
+  event.preventDefault();
+
+  isLoading.value = true
+  
+  setTimeout(() => {
+    console.log('LoginData: ', loginData)
+
+    isLoading.value = false
+  }, 3000);
+}
 </script>
 
 <template>
@@ -25,13 +45,15 @@ import Logo from '../components/Logo.vue';
       />
     </header>
 
-    <form class="flex flex-col gap-4 items-stretch w-full max-w-sm mt-10">
+    <form @submit="validateForm" class="flex flex-col gap-4 items-stretch w-full max-w-sm mt-10">
       <div class="flex flex-col gap-3">
         <label class="font-semibold" for="lblEmail">
           Endereço de e-mail
         </label>
 
         <TextInput
+          v-model="loginData.email"
+          :type="'email'"
           :icon="'EnvelopeIcon'"
           :text="'johndoe@email.com'"
         />
@@ -43,6 +65,8 @@ import Logo from '../components/Logo.vue';
         </label>
 
         <TextInput
+          v-model="loginData.password"
+          :type="'password'"
           :icon="'LockClosedIcon'"
           :text="'**********'"
         />
@@ -58,6 +82,7 @@ import Logo from '../components/Logo.vue';
 
       <Button
         :text="'Entrar na plataforma'"
+        :isLoading="isLoading"
         class="mt-4"
       />
     </form>
