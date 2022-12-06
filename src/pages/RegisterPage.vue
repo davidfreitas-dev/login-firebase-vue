@@ -22,9 +22,11 @@ let isLoading = ref(false)
 const register = () => {
   isLoading.value = true
 
-  createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
+  const auth = getAuth()
+
+  createUserWithEmailAndPassword(auth, userData.email, userData.password)
     .then((res) => {
-      console.log('Registrado com sucesso!', res)
+      console.log('Registrado com sucesso!', auth.currentUser)
       router.push('/')
     })
     .catch((err) => {

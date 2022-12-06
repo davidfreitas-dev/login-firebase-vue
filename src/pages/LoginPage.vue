@@ -1,11 +1,15 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useRouter } from 'vue-router';
 import Heading from '../components/Heading.vue';
 import Text from '../components/Text.vue';
 import Button from '../components/Button.vue';
 import Checkbox from '../components/Checkbox.vue';
 import TextInput from '../components/TextInput.vue';
 import Logo from '../components/Logo.vue';
+
+const router = useRouter()
 
 const loginData = reactive({
   email: '',
@@ -14,16 +18,29 @@ const loginData = reactive({
 
 const isLoading = ref(false)
 
+const login = () => {
+  isLoading.value = true
+
+  const auth = getAuth()
+
+  signInWithEmailAndPassword(auth, loginData.email, loginData.password)
+    .then((res) => {
+      console.log('Logado com sucesso!', auth.currentUser)
+      router.push('/')
+    })
+    .catch((err) => {
+      console.log(err.code)
+      alert(err.message)
+    })
+    .finally(() => {
+      isLoading.value = false
+    })
+}
+
 const validateForm = (event) => {
   event.preventDefault();
 
-  isLoading.value = true
-  
-  setTimeout(() => {
-    console.log('LoginData: ', loginData)
-
-    isLoading.value = false
-  }, 3000);
+  login()
 }
 </script>
 
