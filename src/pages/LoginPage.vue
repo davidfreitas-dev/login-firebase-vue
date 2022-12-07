@@ -11,6 +11,7 @@ import Checkbox from '../components/Checkbox.vue';
 import TextInput from '../components/TextInput.vue';
 import Logo from '../components/Logo.vue';
 import Toast from '../components/Toast.vue';
+import GoogleButton from '../components/GoogleButton.vue';
 
 const router = useRouter()
 
@@ -109,6 +110,8 @@ const { toast, toastData, handleToast } = useToast()
         :isLoading="isLoading"
         class="mt-4"
       />
+
+      <GoogleButton />
     </form>
 
     <footer class="flex flex-col items-center gap-4 my-8">

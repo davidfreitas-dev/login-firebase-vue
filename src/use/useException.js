@@ -9,6 +9,10 @@ export function useException() {
         exception.value = "E-mail inválido."
         break;
 
+      case 'auth/email-already-in-use':
+        exception.value = "Este e-mail já foi utilizado por outro usuário."
+        break;
+
       case 'auth/user-not-found':
         exception.value = "Nenhuma conta encontrada para este e-mail."
         break;
@@ -19,6 +23,10 @@ export function useException() {
 
       case 'auth/wrong-password':
         exception.value = "Senha incorreta."
+        break;
+
+      case 'auth/weak-password':
+        exception.value = "Sua senha deve possuir no mínimo 6 caracteres."
         break;
 
       case 'auth/invalid-email':

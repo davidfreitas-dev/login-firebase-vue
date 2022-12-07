@@ -1,20 +1,23 @@
 <script setup>
 import { ref, reactive } from 'vue';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useToast } from '../use/useToast';
+import { useException } from '../use/useException';
 import { useRouter } from 'vue-router';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import Heading from '../components/Heading.vue';
 import Text from '../components/Text.vue';
 import Button from '../components/Button.vue';
 import TextInput from '../components/TextInput.vue';
 import Logo from '../components/Logo.vue';
+import Toast from '../components/Toast.vue';
+import GoogleButton from '../components/GoogleButton.vue';
 
 const router = useRouter()
 
 const userData = reactive({
   name: '',
   email: '',
-  password: '',
-  confirmPassword: ''
+  password: ''
 })
 
 const isLoading = ref(false)
@@ -31,15 +34,12 @@ const register = () => {
     })
     .catch((err) => {
       console.log(err.code)
-      alert(err.message)
+      handleException(err.code)
+      handleToast('error', exception)
     })
     .finally(() => {
       isLoading.value = false
     })
-}
-
-const signInWithGoogle = () => {
-  
 }
 
 const validateForm = (event) => {
@@ -47,6 +47,9 @@ const validateForm = (event) => {
 
   register()
 }
+
+const { handleException, exception } = useException()
+const { toast, toastData, handleToast } = useToast()
 </script>
 
 <template>
@@ -107,24 +110,13 @@ const validateForm = (event) => {
         />
       </div>
 
-      <div class="flex flex-col gap-3">
-       <label class="font-semibold" for="lblConfirmPassword">
-          Confirme sua senha
-        </label>
-
-        <TextInput
-          v-model="userData.confirmPassword"
-          :type="'password'"
-          :icon="'LockClosedIcon'"
-          :text="'**********'"
-        />
-      </div>
-
       <Button
         :text="'Cadastrar na plataforma'"
         :isLoading="isLoading"
         class="mt-4"
       />
+
+      <GoogleButton />
     </form>
 
     <footer class="flex flex-col items-center gap-4 mt-8">
@@ -144,5 +136,7 @@ const validateForm = (event) => {
         />
       </router-link>
     </footer>
+
+    <Toast ref="toast" :toastData="toastData"/>
   </div>
 </template>
