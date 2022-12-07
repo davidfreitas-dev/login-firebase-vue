@@ -1,14 +1,16 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { useException } from '../use/useException';
+import { useToast } from '../use/useToast';
 import Heading from '../components/Heading.vue';
 import Text from '../components/Text.vue';
 import Button from '../components/Button.vue';
 import TextInput from '../components/TextInput.vue';
 import Logo from '../components/Logo.vue';
+import Toast from '../components/Toast.vue';
 
-const loginData = reactive({
-  email: ''
-})
+const userEmail = ref('')
 
 const isLoading = ref(false)
 
@@ -16,13 +18,22 @@ const validateForm = (event) => {
   event.preventDefault();
 
   isLoading.value = true
-  
-  setTimeout(() => {
-    console.log('LoginData: ', loginData)
 
-    isLoading.value = false
-  }, 3000);
+  sendPasswordResetEmail(getAuth(), userEmail.value)
+    .then((res) => {
+      handleToast('success', 'Link de recuperação enviado!')
+    })
+    .catch((err) => {
+      handleException(err.code)
+      handleToast('error', exception)
+    })
+    .finally(() => {
+      isLoading.value = false
+    })
 }
+
+const { handleException, exception } = useException()
+const { toast, toastData, handleToast } = useToast()
 </script>
 
 <template>
@@ -50,7 +61,7 @@ const validateForm = (event) => {
         </label>
 
         <TextInput
-          v-model="loginData.email"
+          v-model="userEmail"
           :type="'email'"
           :icon="'EnvelopeIcon'"
           :text="'johndoe@email.com'"
@@ -81,5 +92,7 @@ const validateForm = (event) => {
         />
       </router-link>
     </footer>
+
+    <Toast ref="toast" :toastData="toastData"/>
   </div>
 </template>
