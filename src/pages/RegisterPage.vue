@@ -17,7 +17,7 @@ const userData = reactive({
   confirmPassword: ''
 })
 
-let isLoading = ref(false)
+const isLoading = ref(false)
 
 const register = () => {
   isLoading.value = true
