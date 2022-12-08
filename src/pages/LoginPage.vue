@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import { useToast } from '../use/useToast';
 import { useException } from '../use/useException';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -18,6 +18,12 @@ const router = useRouter()
 const loginData = reactive({
   email: '',
   password: ''
+})
+
+const remember = ref(false)
+
+watch(remember, (newRemember) => {
+  console.log(newRemember)
 })
 
 const isLoading = ref(false)
@@ -98,7 +104,7 @@ const { toast, toastData, handleToast } = useToast()
       </div>
 
       <div class="flex items-center gap-2">
-        <Checkbox :text="'Checkbox'" />
+        <Checkbox v-model="remember" :value="!remember" />
 
         <label for="lblCheckbox" class="text-gray-400 text-sm">
           Lembrar de mim por 30 dias

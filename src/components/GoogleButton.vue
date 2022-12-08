@@ -25,7 +25,7 @@ const signInWithGoogle = () => {
     <div class="flex-grow border-t border-gray-500"></div>
   </div>
 
-  <button @click="signInWithGoogle" type="button" class="flex flex-row justify-center items-center gap-2 cursor-pointer py-3 px-4 bg-white rounded font-semibold text-black text-sm w-full transition-colors focus:ring-2 ring-white">
+  <button @click="signInWithGoogle" type="button" class="flex flex-row justify-center items-center gap-2 cursor-pointer py-3 px-4 bg-white rounded font-semibold text-black text-sm w-full transition-colors">
     <img src="../assets/google.svg" alt="Logo Google" class="w-5 h-5" />
     Entrar com Google
   </button>

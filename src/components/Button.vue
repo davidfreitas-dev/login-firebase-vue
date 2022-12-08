@@ -7,7 +7,7 @@ const props = defineProps(['text', 'isLoading'])
 <template>
   <button
     type="submit"
-    class="py-3 px-4 bg-brand rounded font-semibold text-black text-sm w-full transition-colors hover:bg-brand-hover focus:ring-2 ring-white"
+    class="py-3 px-4 bg-brand rounded font-semibold text-black text-sm w-full transition-colors hover:bg-brand-hover"
   >
     <Loader v-if="isLoading" />
     <span v-else>{{ text }}</span>

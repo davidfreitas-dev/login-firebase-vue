@@ -37,7 +37,7 @@ const handleSignOut = () => {
 
     <button
       @click="handleSignOut"
-      class="py-3 px-4 bg-brand rounded font-semibold text-black text-sm w-36 transition-colors hover:bg-brand-hover focus:ring-2 ring-white"
+      class="py-3 px-4 bg-brand rounded font-semibold text-black text-sm w-36 transition-colors hover:bg-brand-hover"
     >
       Sair
     </button>
