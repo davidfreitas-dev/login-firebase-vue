@@ -7,7 +7,6 @@ const router = createRouter({
     { path: '/login', component: () => import('../pages/LoginPage.vue') },
     { path: '/register', component: () => import('../pages/RegisterPage.vue') },
     { path: '/forgot', component: () => import('../pages/ForgotPage.vue') },
-    { path: '/forgot/reset', component: () => import('../pages/ResetPage.vue') },
     { 
       path: '/', 
       component: () => import('../pages/HomePage.vue'),

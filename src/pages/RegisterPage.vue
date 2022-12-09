@@ -53,7 +53,7 @@ const { toast, toastData, handleToast } = useToast()
 </script>
 
 <template>
-  <div class="w-screen h-screen bg-gray-900 flex flex-col items-center justify-center text-gray-100">
+  <div class="w-screen h-screen p-7 bg-gray-900 flex flex-col items-center justify-center text-gray-100">
     <header class="flex flex-col items-center">
       <Logo />
 
