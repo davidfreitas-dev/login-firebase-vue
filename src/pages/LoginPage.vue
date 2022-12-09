@@ -51,7 +51,11 @@ const login = () => {
 const validateForm = (event) => {
   event.preventDefault();
 
-  login()
+  if (loginData.email && loginData.password) {
+    login()
+  } else {
+    handleToast('error', 'Informe seu e-mail e senha.')
+  }
 }
 
 const { handleException, exception } = useException()
@@ -100,6 +104,7 @@ const { toast, toastData, handleToast } = useToast()
           :type="'password'"
           :icon="'LockClosedIcon'"
           :text="'**********'"
+          @onKeyupEnter="validateForm"
         />
       </div>
 

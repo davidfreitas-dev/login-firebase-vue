@@ -14,12 +14,10 @@ const userEmail = ref('')
 
 const isLoading = ref(false)
 
-const validateForm = (event) => {
-  event.preventDefault();
-
+const handleRecover = (userEmail) => {
   isLoading.value = true
 
-  sendPasswordResetEmail(getAuth(), userEmail.value)
+  sendPasswordResetEmail(getAuth(), userEmail)
     .then((res) => {
       handleToast('success', 'Link de recuperação enviado!')
     })
@@ -30,6 +28,16 @@ const validateForm = (event) => {
     .finally(() => {
       isLoading.value = false
     })
+}
+
+const validateForm = (event) => {
+  event.preventDefault();
+
+  if (userEmail.value) {
+    handleRecover()
+  } else {
+    handleToast('error', 'Informe seu e-mail.')
+  }
 }
 
 const { handleException, exception } = useException()
@@ -65,6 +73,7 @@ const { toast, toastData, handleToast } = useToast()
           :type="'email'"
           :icon="'EnvelopeIcon'"
           :text="'johndoe@email.com'"
+          @onKeyupEnter="validateForm"
         />
       </div>
 

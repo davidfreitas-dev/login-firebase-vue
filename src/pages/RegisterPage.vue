@@ -45,7 +45,11 @@ const register = () => {
 const validateForm = (event) => {
   event.preventDefault()
 
-  register()
+  if (userData.name && userData.email && userData.password) {
+    register()
+  } else {
+    handleToast('error', 'Preencha todos os campos.')
+  }
 }
 
 const { handleException, exception } = useException()
@@ -107,6 +111,7 @@ const { toast, toastData, handleToast } = useToast()
           :type="'password'"
           :icon="'LockClosedIcon'"
           :text="'**********'"
+          @onKeyupEnter="validateForm"
         />
       </div>
 
